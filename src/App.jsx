@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
-
-  const submitHandeler = () =>{
-    setCount(count + 5)
-  }
-
+  const [todos, setTodos] = useState([])
   useEffect(()=>{
-    console.log("this is Effect")
-  }, [count])
-  console.log("Im randaring")
+      fetch("https://jsonplaceholder.typicode.com/todos?_limit=5")
+      .then((res)=>{
+        return res.json()
+      })
+      .then((data)=>{
+        setTodos(data)
+        console.log(todos)
+      })
+    }, [])
   return (
     <>
-        <button onClick={submitHandeler} >Incriment with +5</button>
-        <p>Result: {count}</p>
-        {console.log("Last Randering")}
+        <h1>Todos</h1>
+        <ul>{todos.map((todo)=>{
+          return <li key={todo.id}>{todo.title}</li>
+        })}</ul>
     </>
   )
 }
