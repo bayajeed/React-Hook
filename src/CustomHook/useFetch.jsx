@@ -4,6 +4,7 @@ const useFetch = (url) => {
   const[ datas, setData] = useState(null)
   const[error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [ noteTitle, setNoteTitle] = useState("")
 
   console.log("first randering:", datas)
 
@@ -28,9 +29,11 @@ useEffect(() =>{
       setIsLoading(false)
     })
   }, 3000);
-}, [url])
+},[noteTitle])
 
-return { datas , error, isLoading }
+
+
+return { datas , error, isLoading, noteTitle, setNoteTitle }
 
 }
 export default useFetch;
